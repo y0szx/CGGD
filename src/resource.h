@@ -36,7 +36,6 @@ namespace cg
 	template<typename T>
 	inline resource<T>::resource(size_t size)
 	{
-		// TODO Lab: 1.02 Implement `cg::resource` class
 		data.resize(size);
 		stride = 0;
 	}
