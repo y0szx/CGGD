@@ -7,18 +7,20 @@
 
 #include <stb_image_write.h>
 
-std::string view_command(const std::filesystem::path& path)
-{
-#ifdef __APPLE__
-	return std::string("open ").append(path.string());
-#endif
-#ifdef __WINDOWS__
-	return std::string("start ").append(path.string());
-#endif
-	return path.string();
-}
+//std::string view_command(const std::filesystem::path& path)
+//{
+//#ifdef __APPLE__
+//	return std::string("open ").append(path.string());
+//#endif
+//#ifdef __WINDOWS__
+//	return std::string("start ").append(path.string());
+//#endif
+//	return path.string();
+//}
 
-void cg::utils::save_resource(cg::resource<cg::unsigned_color>& render_target, const std::filesystem::path& filepath)
+using namespace cg::utils;
+
+void cg::utils::save_resource(cg::resource<cg::unsigned_color>& render_target, const std::filesystem::path filepath)
 {
 	int width = static_cast<int>(render_target.get_stride());
 	int height = static_cast<int>(render_target.get_number_of_elements()) / width;
@@ -30,6 +32,9 @@ void cg::utils::save_resource(cg::resource<cg::unsigned_color>& render_target, c
 	if (result != 1)
 		THROW_ERROR("Can't save the resource");
 
-	std::system(view_command(filepath).c_str());
+	std::string view_command("open ");
+	view_command.append(filepath.string());
+
+	std::system(view_command.c_str());
 }
 
