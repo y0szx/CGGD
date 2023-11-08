@@ -198,13 +198,13 @@ namespace cg::renderer
 	{
 		for (size_t frame_id = 0; frame_id < accumulation_num; frame_id++)
 		{
-			std::cout << "Tracing " << frame_id << "/" << accumulation_num << "frame\n";
+			std::cout << "Tracing " << frame_id << "/" << accumulation_num << " frame\n";
 			float2 jitter = get_jitter(frame_id);
 
 #pragma omp parallel for
-			for (size_t x = 0; x < width; x++)
+			for (int x = 0; x < width; x++)
 			{
-				for (size_t y = 0; y < height; y++)
+				for (int y = 0; y < height; y++)
 				{
 					float u = (2.f * x + jitter.x) / static_cast<float>(width) - 1.f;
 					float v = (2.f * y + jitter.y) / static_cast<float>(height) - 1.f;
